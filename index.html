@@ -41,71 +41,73 @@
 
   /* ---------- settings ---------- */
   .settings{
-    max-width:920px;margin:0 auto;
-    padding:clamp(42px,7vw,76px) clamp(18px,4vw,28px) 80px;
-    display:flex;flex-direction:column;gap:clamp(24px,4vw,34px);
+    max-width:940px;margin:0 auto;
+    padding:clamp(14px,2vw,24px) clamp(18px,4vw,28px) clamp(14px,2vw,24px);
+    display:flex;flex-direction:column;gap:clamp(12px,1.8vw,18px);
   }
   .brand{display:flex;flex-direction:column;align-items:center;text-align:center}
-  .brand-crest{height:clamp(92px,14vw,118px);width:auto;margin:0 0 16px}
+  .brand-crest{height:clamp(50px,6vw,72px);width:auto;margin:0 0 8px}
   .eyebrow{
-    margin:0 0 4px;font-size:.72rem;font-weight:700;letter-spacing:.34em;
+    margin:0 0 2px;font-size:.63rem;font-weight:700;letter-spacing:.3em;
     text-transform:uppercase;color:var(--crimson);
   }
   .brand h1{
     margin:0;font-family:var(--serif);font-weight:400;
-    font-size:clamp(2.45rem,6vw,3.7rem);line-height:1.02;letter-spacing:.015em;
+    font-size:clamp(1.95rem,3.4vw,2.9rem);line-height:1.02;letter-spacing:.015em;
   }
   .brand-school{
-    margin:10px 0 0;font-family:var(--serif);font-size:clamp(.76rem,1.6vw,.94rem);
-    letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
+    margin:6px 0 0;font-family:var(--serif);font-size:clamp(.68rem,1.3vw,.82rem);
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
   }
   .brand-motto{
-    margin:12px 0 0;font-size:.64rem;letter-spacing:.42em;text-transform:uppercase;
+    margin:5px 0 0;font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;
     color:var(--muted);
   }
   .brand-motto::before,.brand-motto::after{content:"—";margin:0 10px;color:var(--line)}
 
   .panel{
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:clamp(22px,4vw,38px);
-    display:grid;gap:26px;
+    box-shadow:0 10px 30px rgba(22,16,16,.07);padding:clamp(16px,2.2vw,24px);
+    display:grid;gap:14px;
   }
   .panel-head h2{
-    margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2.6vw,1.65rem);
+    margin:0 0 3px;font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,2vw,1.4rem);
   }
-  .panel-head p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55;max-width:60ch}
-  .field{display:grid;gap:10px}
+  .panel-head p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.45;max-width:70ch}
+  .field{display:grid;gap:6px}
+  .field-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;align-items:start}
+  .field-row select{max-width:none}
   .field-label{
-    font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+    font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
   }
   select{
     appearance:none;-webkit-appearance:none;width:100%;max-width:460px;
-    font:inherit;font-size:1rem;color:var(--ink);background-color:var(--white);
-    border:1px solid var(--line);border-radius:10px;padding:13px 46px 13px 16px;
+    font:inherit;font-size:.95rem;color:var(--ink);background-color:var(--white);
+    border:1px solid var(--line);border-radius:10px;padding:9px 40px 9px 14px;
     cursor:pointer;
     background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23161616' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 17px center;
+    background-repeat:no-repeat;background-position:right 14px center;
   }
   select:hover{border-color:#C9BFBF}
-  #minutes{max-width:240px}
-  .hint{margin:0;color:var(--muted);font-size:.88rem;line-height:1.5;min-height:1.35em}
+  #minutes{max-width:none}
+  .hint{margin:0;color:var(--muted);font-size:.8rem;line-height:1.4;min-height:0}
 
-  .levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:620px}
+  .levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;max-width:none}
   .level{
     appearance:none;font:inherit;cursor:pointer;background:var(--white);
-    border:1px solid var(--line);border-radius:10px;padding:11px 3px 9px;
+    border:1px solid var(--line);border-radius:10px;padding:7px 2px 6px;
     display:flex;flex-direction:column;align-items:center;gap:1px;
     color:var(--muted);transition:border-color .15s ease,background-color .15s ease,color .15s ease;
   }
-  .level span{font-family:var(--serif);font-size:1.3rem;line-height:1;color:var(--ink);transition:color .15s ease}
-  .level small{font-size:.61rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+  .level span{font-family:var(--serif);font-size:1.15rem;line-height:1;color:var(--ink);transition:color .15s ease}
+  .level small{font-size:.56rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
   .level:hover{border-color:var(--crimson)}
   .level[aria-pressed="true"]{background:var(--crimson);border-color:var(--crimson);color:#FBE9EC}
   .level[aria-pressed="true"] span{color:#fff}
 
   .panel-foot{
     display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
-    border-top:1px solid var(--line);padding-top:22px;
+    border-top:1px solid var(--line);padding-top:12px;
   }
   .count-note{margin:0;color:var(--muted);font-size:.85rem}
   .btn{
@@ -119,7 +121,7 @@
   .btn svg{flex:none}
   .btn-primary{
     background:var(--crimson);border-color:var(--crimson);color:#fff;
-    padding:15px 34px;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:12px 30px;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
     box-shadow:0 10px 24px rgba(166,25,46,.22);
   }
   .btn-primary:hover,.btn-primary:focus-visible{background:var(--crimson-deep);border-color:var(--crimson-deep);color:#fff}
@@ -195,13 +197,13 @@
   }
   .q-card{
     position:relative;background:var(--white);border:1px solid var(--line);
-    border-radius:12px;padding:17px 20px 15px 54px;
+    border-radius:12px;padding:17px 20px 15px calc(18px + var(--q-font) * var(--q-scale,1) * 1.7);
     display:flex;flex-direction:column;gap:7px;min-height:96px;
     transition:background-color .2s ease,border-color .2s ease;
   }
   .q-letter{
-    position:absolute;left:18px;top:17px;font-family:var(--serif);
-    font-size:1rem;color:var(--crimson);
+    position:absolute;left:18px;top:17px;font-family:var(--serif);line-height:1.3;
+    font-size:calc(var(--q-font) * var(--q-scale,1));color:var(--crimson);
   }
   .q-text{margin:0;font-size:calc(var(--q-font) * var(--q-scale,1));line-height:1.3;font-weight:600;letter-spacing:.005em;overflow-wrap:anywhere}
   .q-answer{
@@ -224,6 +226,7 @@
 
   @media (max-width:760px){
     .questions{grid-template-columns:1fr}
+    .field-row{grid-template-columns:1fr;gap:12px}
     .questions{--q-font:1.2rem}
     .toolbar .btn{flex:1 1 auto;justify-content:center}
     .toolbar .textsize{width:100%;justify-content:center;margin-left:0}
@@ -236,8 +239,26 @@
   }
   @media (max-width:420px){
     .level small{font-size:.55rem;letter-spacing:0}
-    .q-card{padding-left:48px}
+    .q-card{padding-left:calc(15px + var(--q-font) * var(--q-scale,1) * 1.7)}
     .q-letter{left:15px}
+  }
+  @media (max-height:720px){
+    .settings{padding-top:10px;padding-bottom:12px;gap:11px}
+    .brand-crest{height:44px;margin-bottom:4px}
+    .eyebrow{font-size:.56rem}
+    .brand h1{font-size:1.85rem}
+    .brand-school{margin-top:4px;font-size:.66rem}
+    .brand-motto{margin-top:3px;font-size:.52rem}
+    .panel{padding:13px;gap:10px}
+    .panel-head h2{font-size:1.14rem}
+    .panel-head p{font-size:.79rem}
+    .field-row{gap:12px}
+    .field{gap:4px}
+    .level{padding:5px 2px 4px}
+    .level span{font-size:1.05rem}
+    .hint{font-size:.74rem}
+    .panel-foot{padding-top:9px}
+    .btn-primary{padding:10px 26px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -264,29 +285,30 @@
         <p>Choose a topic, set the difficulty and pick a time limit. Every round gives ten questions with the answers hidden.</p>
       </div>
 
-      <div class="field">
-        <label class="field-label" for="topic">Topic</label>
-        <select id="topic"></select>
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label" for="topic">Topic</label>
+          <select id="topic"></select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="minutes">Time limit</label>
+          <select id="minutes">
+            <option value="1">1 minute</option>
+            <option value="2">2 minutes</option>
+            <option value="3">3 minutes</option>
+            <option value="4">4 minutes</option>
+            <option value="5" selected>5 minutes</option>
+            <option value="10">10 minutes</option>
+            <option value="15">15 minutes</option>
+          </select>
+        </div>
       </div>
 
       <div class="field">
         <span class="field-label" id="level-label">Difficulty level</span>
         <div class="levels" id="level-picker" role="group" aria-labelledby="level-label"></div>
         <p class="hint" id="level-hint" aria-live="polite"></p>
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="minutes">Time limit</label>
-        <select id="minutes">
-          <option value="1">1 minute</option>
-          <option value="2">2 minutes</option>
-          <option value="3">3 minutes</option>
-          <option value="4">4 minutes</option>
-          <option value="5" selected>5 minutes</option>
-          <option value="10">10 minutes</option>
-          <option value="15">15 minutes</option>
-        </select>
-        <p class="hint">A progress bar counts down once you press start.</p>
       </div>
 
       <div class="panel-foot">
