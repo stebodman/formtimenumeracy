@@ -169,6 +169,15 @@
   }
   .timer-fill.low{background:#B45309}
   .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0 14px}
+  .textsize{display:flex;align-items:center;gap:5px;margin-left:4px}
+  .textsize .btn{flex:none;width:38px;padding:10px 0;font-family:var(--serif);font-size:.95rem;line-height:1}
+  .textsize-value{
+    appearance:none;background:none;border:0;font:inherit;font-size:.7rem;font-weight:700;
+    letter-spacing:.04em;color:var(--muted);cursor:pointer;min-width:44px;padding:6px 2px;
+    font-variant-numeric:tabular-nums;border-radius:6px;line-height:1;
+  }
+  .textsize-value:hover{color:var(--crimson)}
+  .textsize .btn:disabled{opacity:.35;cursor:not-allowed;border-color:var(--line);color:var(--ink)}
 
   .timeup{
     margin:18px clamp(16px,4vw,40px) 0;padding:11px 16px;border-radius:10px;
@@ -182,6 +191,7 @@
     padding:clamp(16px,3vw,28px) clamp(16px,4vw,40px) 44px;
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
     gap:clamp(10px,1.6vw,16px);align-content:start;
+    --q-font:1.32rem;
   }
   .q-card{
     position:relative;background:var(--white);border:1px solid var(--line);
@@ -193,17 +203,13 @@
     position:absolute;left:18px;top:17px;font-family:var(--serif);
     font-size:1rem;color:var(--crimson);
   }
-  .q-text{margin:0;font-size:1.32rem;line-height:1.3;font-weight:600;letter-spacing:.005em;overflow-wrap:anywhere}
+  .q-text{margin:0;font-size:calc(var(--q-font) * var(--q-scale,1));line-height:1.3;font-weight:600;letter-spacing:.005em;overflow-wrap:anywhere}
   .q-answer{
-    margin:0;display:flex;align-items:baseline;gap:9px;
-    font-weight:700;color:var(--crimson-deep);font-size:1.08rem;overflow-wrap:anywhere;
+    margin:0;display:flex;justify-content:flex-end;text-align:right;
+    font-weight:700;color:#157347;font-size:calc(var(--q-font) * var(--q-scale,1));
+    line-height:1.3;overflow-wrap:anywhere;
   }
   .q-answer[hidden]{display:none}
-  .q-answer.long{font-size:.95rem;line-height:1.4;font-weight:600}
-  .a-tag{
-    flex:none;font-size:.58rem;font-weight:700;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--muted);
-  }
   .q-card.revealed{background:#FCF7F8;border-color:#EFD9DC}
 
   body.focus-mode::before{height:4px}
@@ -211,21 +217,22 @@
   body.focus-mode .quiz-chrome{padding-top:10px}
   body.focus-mode .quiz-crest,body.focus-mode .quiz-eyebrow{display:none}
   body.focus-mode .quiz-topic{font-size:1.05rem}
-  body.focus-mode .questions{padding-top:14px;padding-bottom:16px;align-content:start}
-  body.focus-mode .q-text{font-size:clamp(1.25rem,2vw,1.85rem)}
+  body.focus-mode .questions{padding-top:14px;padding-bottom:16px;align-content:start;--q-font:clamp(1.25rem,2vw,1.85rem)}
   body.focus-mode .q-card{min-height:0;padding-top:15px;padding-bottom:15px}
 
   .noscript{max-width:600px;margin:60px auto;padding:0 24px;font-family:var(--sans);color:var(--ink)}
 
   @media (max-width:760px){
     .questions{grid-template-columns:1fr}
-    .q-text{font-size:1.2rem}
+    .questions{--q-font:1.2rem}
     .toolbar .btn{flex:1 1 auto;justify-content:center}
+    .toolbar .textsize{width:100%;justify-content:center;margin-left:0}
+    .toolbar .textsize .btn{flex:none;width:46px}
     .btn-back{flex-basis:100%;margin-right:0;justify-content:center}
     .panel-foot{flex-direction:column;align-items:stretch}
     .btn-primary{width:100%}
     .quiz-meta{width:100%;justify-content:space-between;margin-left:0}
-    body.focus-mode .q-text{font-size:1.35rem}
+    body.focus-mode .questions{--q-font:1.35rem}
   }
   @media (max-width:420px){
     .level small{font-size:.55rem;letter-spacing:0}
@@ -312,6 +319,11 @@
         <button class="btn btn-quiet btn-back" type="button" id="btn-settings">Back to settings</button>
         <button class="btn" type="button" id="btn-answers" aria-pressed="false">Show answers</button>
         <button class="btn" type="button" id="btn-new">New questions</button>
+        <div class="textsize" role="group" aria-label="Question text size">
+          <button class="btn btn-size" type="button" id="text-smaller" aria-label="Smaller question text" title="Smaller text">A−</button>
+          <button class="textsize-value" type="button" id="text-reset" aria-label="Reset question text size to 100%" title="Reset to 100%">100%</button>
+          <button class="btn btn-size" type="button" id="text-larger" aria-label="Larger question text" title="Larger text">A+</button>
+        </div>
         <button class="btn btn-accent" type="button" id="btn-fullscreen" aria-pressed="false">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
           <span id="fs-label">Full screen</span>
@@ -319,7 +331,7 @@
       </div>
     </div>
 
-    <p class="timeup" id="timeup" hidden>Time's up — the answers are now showing.</p>
+    <p class="timeup" id="timeup" role="status" hidden>Time's up — the answers stay hidden until you press Show answers.</p>
     <ol class="questions" id="questions"></ol>
   </section>
 </main>
@@ -693,12 +705,40 @@
   var btnSettings = document.getElementById('btn-settings');
   var btnFullscreen = document.getElementById('btn-fullscreen');
   var fsLabel = document.getElementById('fs-label');
+  var btnTextSmaller = document.getElementById('text-smaller');
+  var btnTextLarger = document.getElementById('text-larger');
+  var btnTextReset = document.getElementById('text-reset');
 
   var state = {
     topic:'add', level:1, minutes:5, questions:[],
     answersShown:false, totalMs:300000, endsAt:0,
     timerId:null, finished:false, focusMode:false
   };
+
+  var TEXT_SCALE_MIN = 0.7, TEXT_SCALE_MAX = 1.9, TEXT_SCALE_STEP = 0.1;
+  var TEXT_SCALE_KEY = 'kingsQuizTextScale';
+  var textScale = 1;
+
+  function clampTextScale(value){
+    return Math.min(TEXT_SCALE_MAX, Math.max(TEXT_SCALE_MIN, Math.round(value * 10) / 10));
+  }
+
+  function applyTextScale(value, persist){
+    textScale = clampTextScale(value);
+    document.documentElement.style.setProperty('--q-scale', String(textScale));
+    btnTextReset.textContent = Math.round(textScale * 100) + '%';
+    btnTextSmaller.disabled = textScale <= TEXT_SCALE_MIN;
+    btnTextLarger.disabled = textScale >= TEXT_SCALE_MAX;
+    if(persist){
+      try{ localStorage.setItem(TEXT_SCALE_KEY, String(textScale)); }catch(e){}
+    }
+  }
+
+  function storedTextScale(){
+    var saved = 1;
+    try{ saved = Number(localStorage.getItem(TEXT_SCALE_KEY)); }catch(e){}
+    return saved > 0 && isFinite(saved) ? saved : 1;
+  }
 
   function levelInfo(n){
     return LEVELS.filter(function(l){ return l.n === n; })[0] || LEVELS[0];
@@ -777,17 +817,11 @@
       var answer = document.createElement('p');
       answer.className = 'q-answer';
       answer.hidden = true;
-      if(item.a.length > 26) answer.classList.add('long');
-
-      var tag = document.createElement('span');
-      tag.className = 'a-tag';
-      tag.textContent = 'Answer';
 
       var value = document.createElement('span');
       value.className = 'a-val';
       value.textContent = item.a;
 
-      answer.appendChild(tag);
       answer.appendChild(value);
       card.appendChild(letter);
       card.appendChild(text);
@@ -805,6 +839,7 @@
     });
     btnAnswers.textContent = show ? 'Hide answers' : 'Show answers';
     btnAnswers.setAttribute('aria-pressed', String(!!show));
+    if(show) timeup.hidden = true;
   }
 
   function formatTime(ms){
@@ -819,6 +854,38 @@
       clearInterval(state.timerId);
       state.timerId = null;
     }
+  }
+
+  var audioCtx = null;
+
+  function ensureAudio(){
+    if(!audioCtx){
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return null;
+      try{ audioCtx = new Ctx(); }catch(e){ return null; }
+    }
+    if(audioCtx.state === 'suspended' && audioCtx.resume){
+      audioCtx.resume().catch(function(){});
+    }
+    return audioCtx;
+  }
+
+  function beep(){
+    var ctx = ensureAudio();
+    if(!ctx) return;
+    var now = ctx.currentTime;
+    [0, 0.28, 0.56].forEach(function(offset, index){
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(index === 2 ? 660 : 880, now + offset);
+      gain.gain.setValueAtTime(0.0001, now + offset);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + offset + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.22);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now + offset);
+      osc.stop(now + offset + 0.24);
+    });
   }
 
   function tick(){
@@ -851,11 +918,12 @@
     timerBar.setAttribute('aria-valuenow', '0');
     clock.textContent = '0:00';
     clock.classList.add('low');
-    setAnswers(true);
+    beep();
     timeup.hidden = false;
   }
 
   function startQuiz(){
+    ensureAudio();
     var topic = TOPICS.filter(function(t){ return t.id === topicSelect.value; })[0] || TOPICS[0];
     state.topic = topic.id;
     state.level = Number(levelPicker.querySelector('[aria-pressed="true"]').dataset.level) || 1;
@@ -916,6 +984,9 @@
   btnSettings.addEventListener('click', backToSettings);
 
   btnFullscreen.addEventListener('click', function(){ setFocusMode(!state.focusMode); });
+  btnTextSmaller.addEventListener('click', function(){ applyTextScale(textScale - TEXT_SCALE_STEP, true); });
+  btnTextLarger.addEventListener('click', function(){ applyTextScale(textScale + TEXT_SCALE_STEP, true); });
+  btnTextReset.addEventListener('click', function(){ applyTextScale(1, true); });
 
   document.addEventListener('fullscreenchange', function(){
     if(!document.fullscreenElement && state.focusMode){
@@ -936,6 +1007,7 @@
   ------------------------------------------------------------------ */
   populateTopics();
   populateLevels();
+  applyTextScale(storedTextScale(), false);
   clock.textContent = formatTime(state.minutes * 60 * 1000);
 
   window.KingsQuiz = {
