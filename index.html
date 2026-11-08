@@ -623,11 +623,11 @@
     }},
     { id:'words-figures', group:'Place value & rounding', label:'Write the number in figures', make:function(level){
       var v = wordsValue(level);
-      return { q:'Write in figures: ' + numberToWords(v), a:num(v) };
+      return { q:numberToWords(v), a:num(v) };
     }},
     { id:'words-words', group:'Place value & rounding', label:'Write the number in words', make:function(level){
       var v = wordsValue(level);
-      return { q:'Write in words: ' + num(v), a:numberToWords(v) };
+      return { q:num(v), a:numberToWords(v) };
     }},
 
     /* ---------------- Fractions & percentages ---------------- */
